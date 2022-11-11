@@ -1,0 +1,7 @@
+name: ColdFeeling
+version: '${project.version}'
+main: pe.bazan.luis.plugins.coldfeeling.ColdFeeling
+api-version: 1.19
+depend: [ CommandAPI ]
+authors: [ 'Luis Bazan' ]
+softdepend: [ PlaceholderAPI ]
