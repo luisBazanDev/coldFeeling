@@ -10,6 +10,7 @@ public class ColdPlayer {
   private int environment = 0; // rain / snow / dimension
   private int light = 0; // Light
   private int temperature = 0;
+  private int maxTemperatura = 0;
   private String biomeName = "";
 
   public ColdPlayer(Player bukkitPlayer) {
@@ -38,6 +39,10 @@ public class ColdPlayer {
 
   public int getTotal() {
     return armor + biome + floor + environment + light;
+  }
+
+  public int getMaxTemperatura() {
+    return maxTemperatura;
   }
 
   public int getTemperature() {
@@ -74,5 +79,13 @@ public class ColdPlayer {
 
   public void setBiomeName(String biomeName) {
     this.biomeName = biomeName;
+  }
+
+  public void setTemperature(int temperature) {
+    this.temperature = temperature;
+  }
+
+  public void setMaxTemperatura(int maxTemperatura) {
+    this.maxTemperatura = maxTemperatura;
   }
 }
