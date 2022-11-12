@@ -17,8 +17,10 @@ public class TemperatureBlocks {
         all = config.getInt(key);
       } else {
         Material material = Material.valueOf(key);
-        ColdFeeling.PrintError("Error in the config for blocks."+key);
-        if(material == null) continue;
+        if(material == null) {
+          ColdFeeling.PrintError("Error in the config for blocks."+key);
+          continue;
+        };
         customTemperatures.put(material, config.getInt(key));
       }
     }
