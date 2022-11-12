@@ -35,9 +35,6 @@ public class PlayerDetect implements Listener {
   @EventHandler
   public void onPlayerDeath(PlayerDeathEvent e) {
     ItemStack head = SkullCreator.itemFromBase64(restorerAPI.getSkinData(restorerAPI.getSkinName(e.getPlayer().getName())).getValue());
-    ItemMeta meta = head.getItemMeta();
-    meta.setDisplayName(ChatColor.RESET + e.getPlayer().getName()+"'s Head");
-    head.setItemMeta(meta);
     e.getPlayer().getWorld().dropItemNaturally(e.getPlayer().getLocation(), head);
   }
 }
