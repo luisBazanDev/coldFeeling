@@ -4,4 +4,4 @@ main: pe.bazan.luis.plugins.coldfeeling.ColdFeeling
 api-version: 1.19
 depend: [ CommandAPI ]
 authors: [ 'Luis Bazan' ]
-softdepend: [ PlaceholderAPI ]
+softdepend: [ PlaceholderAPI, SkinsRestorer ]
