@@ -2,3 +2,8 @@ blocks:
   ALL: 0
   ICE: -5
   AIR: 1
+armors:
+  IRON_HELMET: 10
+  IRON_CHESTPLATE: 10
+  IRON_LEGGINGS: 10
+  IRON_BOOTS: 10
