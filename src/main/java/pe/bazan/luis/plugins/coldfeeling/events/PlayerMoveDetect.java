@@ -22,18 +22,6 @@ public class PlayerMoveDetect implements Listener {
     coldPlayer.setBiomeName(loc.getBlock().getBiome().name());
 
     // blocks on the floor
-    World world = loc.getWorld();
-    int floorTotal = 0;
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY() + 1, loc.getBlockZ()).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ()).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY() - 2, loc.getBlockZ()).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY() - 3, loc.getBlockZ()).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ() - 1).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ() + 1).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX() - 1, loc.getBlockY() - 1, loc.getBlockZ()).getType());
-    floorTotal += TemperatureBlocks.getTemperature(world.getBlockAt(loc.getBlockX() + 1, loc.getBlockY() - 1, loc.getBlockZ()).getType());
-
-    coldPlayer.setFloor(floorTotal);
+    coldPlayer.setFloor(TemperatureBlocks.calculateTemperature(e.getTo()));
   }
 }
