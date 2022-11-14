@@ -2,6 +2,7 @@ package pe.bazan.luis.plugins.coldfeeling.utils;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import pe.bazan.luis.plugins.coldfeeling.ColdFeeling;
 
 import java.util.HashMap;
@@ -31,5 +32,18 @@ public class TemperatureArmors {
     Integer value = armorsTemperatures.get(material);
     if(value != null) return value;
     return all;
+  }
+
+  public static int calculateTemperature(Player player) {
+    int armorTotal = 0;
+    if(player.getInventory().getHelmet() != null)
+      armorTotal += getTemperature(player.getInventory().getHelmet().getType());
+    if(player.getInventory().getChestplate() != null)
+      armorTotal += getTemperature(player.getInventory().getChestplate().getType());
+    if(player.getInventory().getLeggings() != null)
+      armorTotal += getTemperature(player.getInventory().getLeggings().getType());
+    if(player.getInventory().getBoots() != null)
+      armorTotal += getTemperature(player.getInventory().getBoots().getType());
+    return armorTotal;
   }
 }

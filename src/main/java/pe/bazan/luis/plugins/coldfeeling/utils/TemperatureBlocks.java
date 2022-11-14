@@ -1,6 +1,8 @@
 package pe.bazan.luis.plugins.coldfeeling.utils;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import pe.bazan.luis.plugins.coldfeeling.ColdFeeling;
 
@@ -30,5 +32,23 @@ public class TemperatureBlocks {
     Integer value = customTemperatures.get(material);
     if(value == null) return all;
     return customTemperatures.get(material);
+  }
+
+  public static int calculateTemperature(Location loc) {
+    final World world =  loc.getWorld();
+    final int x = loc.getBlockX();
+    final int y = loc.getBlockY();
+    final int z = loc.getBlockZ();
+    int floorTotal = 0;
+    floorTotal += getTemperature(world.getBlockAt(x, y + 1, z).getType());
+    floorTotal += getTemperature(loc.getBlock().getType());
+    floorTotal += getTemperature(world.getBlockAt(x, y - 1, z).getType());
+    floorTotal += getTemperature(world.getBlockAt(x, y - 2, z).getType());
+    floorTotal += getTemperature(world.getBlockAt(x, y - 3, z).getType());
+    floorTotal += getTemperature(world.getBlockAt(x, y - 1, z - 1).getType());
+    floorTotal += getTemperature(world.getBlockAt(x, y - 1, z + 1).getType());
+    floorTotal += getTemperature(world.getBlockAt(x - 1, y - 1, z).getType());
+    floorTotal += getTemperature(world.getBlockAt(x + 1, y - 1, z).getType());
+    return floorTotal;
   }
 }
