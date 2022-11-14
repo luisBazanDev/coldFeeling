@@ -1,7 +1,6 @@
 package pe.bazan.luis.plugins.coldfeeling.events;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import pe.bazan.luis.plugins.coldfeeling.ColdFeeling;
@@ -13,18 +12,8 @@ public class PlayerArmorDetect implements Listener {
 
   @EventHandler
   public void onPlayerEquipArmor(PlayerArmorChangeEvent e) {
-    Player player = e.getPlayer();
-    ColdPlayer coldPlayer = coldFeeling.getColdPlayers().get(player.getName());
-    int armorTotal = 0;
-    if(player.getInventory().getHelmet() != null)
-      armorTotal += TemperatureArmors.getTemperature(player.getInventory().getHelmet().getType());
-    if(player.getInventory().getChestplate() != null)
-      armorTotal += TemperatureArmors.getTemperature(player.getInventory().getChestplate().getType());
-    if(player.getInventory().getLeggings() != null)
-      armorTotal += TemperatureArmors.getTemperature(player.getInventory().getLeggings().getType());
-    if(player.getInventory().getBoots() != null)
-      armorTotal += TemperatureArmors.getTemperature(player.getInventory().getBoots().getType());
-    coldPlayer.setArmor(armorTotal);
+    ColdPlayer coldPlayer = coldFeeling.getColdPlayers().get(e.getPlayer().getName());
+    coldPlayer.setArmor(TemperatureArmors.calculateTemperature(e.getPlayer()));
   }
 
 }
