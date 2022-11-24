@@ -8,6 +8,7 @@ import pe.bazan.luis.plugins.coldfeeling.events.PlayerMoveDetect;
 import pe.bazan.luis.plugins.coldfeeling.events.PlayerDetect;
 import pe.bazan.luis.plugins.coldfeeling.instances.ColdPlayer;
 import pe.bazan.luis.plugins.coldfeeling.placeholders.ColdPlayersPlaceholder;
+import pe.bazan.luis.plugins.coldfeeling.timers.ChangeTemperature;
 import pe.bazan.luis.plugins.coldfeeling.utils.TemperatureArmors;
 import pe.bazan.luis.plugins.coldfeeling.utils.TemperatureBlocks;
 
@@ -17,6 +18,7 @@ public final class ColdFeeling extends JavaPlugin {
   private static ColdFeeling instance;
   private HashMap<String, ColdPlayer> coldPlayers = new HashMap<>();
   private ColdPlayersPlaceholder coldPlayersPlaceholder;
+  private ChangeTemperature changeTemperatureTimer;
 
   @Override
   public void onEnable() {
@@ -25,8 +27,8 @@ public final class ColdFeeling extends JavaPlugin {
   }
 
   public void setupVariables() {
-    this.instance = this;
-    coldPlayersPlaceholder = new ColdPlayersPlaceholder(this);
+    instance = this;
+    this.coldPlayersPlaceholder = new ColdPlayersPlaceholder(this);
     coldPlayersPlaceholder.register();
     TemperatureBlocks.reloadBlocks();
     TemperatureArmors.reloadArmors();
@@ -36,6 +38,9 @@ public final class ColdFeeling extends JavaPlugin {
     getServer().getPluginManager().registerEvents(new PlayerMoveDetect(), this);
     getServer().getPluginManager().registerEvents(new PlayerPrevent(), this);
     getServer().getPluginManager().registerEvents(new PlayerArmorDetect(), this);
+
+    // Timers
+    this.changeTemperatureTimer = new ChangeTemperature();
   }
 
   @Override

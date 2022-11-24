@@ -1,6 +1,10 @@
 package pe.bazan.luis.plugins.coldfeeling.instances;
 
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import pe.bazan.luis.plugins.coldfeeling.ColdFeeling;
 
 public class ColdPlayer {
   private final Player bukkitPlayer;
@@ -10,11 +14,15 @@ public class ColdPlayer {
   private int environment = 0; // rain / snow / dimension
   private int light = 0; // Light
   private int temperature = 0;
-  private int maxTemperature = 0;
+  private int maxTemperature = 1000;
   private String biomeName = "";
+  private final BossBar bossBar;
 
   public ColdPlayer(Player bukkitPlayer) {
     this.bukkitPlayer = bukkitPlayer;
+    this.bossBar = ColdFeeling.getInstance().getServer().createBossBar("Cold", BarColor.BLUE, BarStyle.SOLID);
+    bossBar.addPlayer(bukkitPlayer);
+    setBossBarVisible(true);
   }
 
   public int getArmor() {
@@ -57,6 +65,13 @@ public class ColdPlayer {
     return bukkitPlayer;
   }
 
+  public BossBar getBossBar() {
+    return bossBar;
+  }
+
+  public double getPercentageCold() {
+    return ((double) Math.negateExact(temperature) + (double) maxTemperature) / (double) maxTemperature;
+  }
   public void setArmor(int armor) {
     this.armor = armor;
   }
@@ -87,5 +102,9 @@ public class ColdPlayer {
 
   public void setMaxTemperature(int maxTemperature) {
     this.maxTemperature = maxTemperature;
+  }
+
+  public void setBossBarVisible(boolean visible) {
+    bossBar.setVisible(visible);
   }
 }
